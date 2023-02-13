@@ -1,17 +1,26 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-const galleryRef = document.querySelector('.gallery');
-
 const createListItemsMarkup = (items) => {
     return items.map(({preview, description, original}) => {
       return `
-    <li class="gallery__item ">
-        <a class="gallery__link" href="large-image.jpg">
+        <a class="gallery__item" href="${original}">
             <img class="gallery__image" src="${preview}" alt="${description}" data-source="${original}">
-        </a>
-    </li>`; 
+        </a>`; 
     }).join('');
 }
 
+const galleryRef = document.querySelector('.gallery');
+
 galleryRef.innerHTML = createListItemsMarkup(galleryItems);
+
+
+galleryRef.addEventListener('click', (event) => {
+    event.preventDefault();
+    if(event.target.nodeName !== 'IMG'){
+        return;
+    }
+    const gallery = new SimpleLightbox('.gallery a', {captionsData: 'alt', captionDelay: 250});
+    gallery.open();
+    gallery.on('closed.simplelightbox', gallery.close);
+}, {once:true});

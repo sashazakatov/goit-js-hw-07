@@ -3,7 +3,7 @@ import { galleryItems } from './gallery-items.js';
 const createListItemsMarkup = (items) => {
     return items.map(({ preview, description, original }) => {
       return `
-    <li class="gallery__item ">
+    <div class="gallery__item ">
         <a class="gallery__link" href="original">
             <img
             class="gallery__image" 
@@ -12,7 +12,7 @@ const createListItemsMarkup = (items) => {
             data-source="${original}"
             >
         </a>
-    </li>`; 
+    </div>`; 
     }).join('');
 }
 const closeLightBox = (lightBox) => {
