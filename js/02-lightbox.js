@@ -14,11 +14,4 @@ const galleryRef = document.querySelector('.gallery');
 
 galleryRef.innerHTML = createListItemsMarkup(galleryItems);
 
-
-galleryRef.addEventListener('click', (event) => {
-    event.preventDefault();
-    if(event.target.nodeName !== 'IMG'){
-        return;
-    }
-    new SimpleLightbox('.gallery a', {captionsData: 'alt', captionDelay: 250}).open();
-}, {once:true});
+new SimpleLightbox('.gallery__item', {captionsData: 'alt', captionDelay: 250, sourceAttr:"href"});

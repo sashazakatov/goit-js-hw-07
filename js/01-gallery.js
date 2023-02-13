@@ -15,13 +15,8 @@ const createListItemsMarkup = (items) => {
     </div>`; 
     }).join('');
 }
-const closeLightBox = (lightBox) => {
-    window.addEventListener('keydown', (event) => {
-        if(event.code !== 'Escape'){
-            return;
-        } 
-        lightBox.close();
-    }, { once: true });
+const createLightBoxMarkup= (element) =>{
+    return `<img width="1280" src="${element.dataset.source}" alt="${element.alt}">`
 }
 
 const galleryRef = document.querySelector('.gallery');
@@ -32,8 +27,16 @@ galleryRef.addEventListener('click', (event) => {
     if(event.target.nodeName !== 'IMG'){
         return;
     }
-    const lightBox = basicLightbox.create(`
-    <img width="1280" src="${event.target.dataset.source}" alt="${event.target.alt}">`, 
-    {onShow: () => closeLightBox(lightBox)});
-    lightBox.show();
+    const closeLightBox = (event) =>{
+        if(event.code === 'Escape'){
+            instance.close();
+        }
+    }
+    const instance = basicLightbox.create(createLightBoxMarkup(event.target),
+    {
+        onShow: () => window.addEventListener('keydown', closeLightBox),
+        onClose: () => window.removeEventListener('keydown', closeLightBox),
+    }
+    );
+    instance.show();
 });
