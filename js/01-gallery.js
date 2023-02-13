@@ -17,7 +17,10 @@ const createListItemsMarkup = (items) => {
 }
 const closeLightBox = (lightBox) => {
     window.addEventListener('keydown', (event) => {
-        if(event.code !== 'Escape') return; lightBox.close()
+        if(event.code !== 'Escape'){
+            return;
+        } 
+        lightBox.close();
     }, { once: true });
 }
 
