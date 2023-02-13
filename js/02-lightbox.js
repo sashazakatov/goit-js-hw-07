@@ -20,7 +20,5 @@ galleryRef.addEventListener('click', (event) => {
     if(event.target.nodeName !== 'IMG'){
         return;
     }
-    const gallery = new SimpleLightbox('.gallery a', {captionsData: 'alt', captionDelay: 250});
-    gallery.open();
-    gallery.on('closed.simplelightbox', gallery.close);
+    new SimpleLightbox('.gallery a', {captionsData: 'alt', captionDelay: 250}).open();
 }, {once:true});

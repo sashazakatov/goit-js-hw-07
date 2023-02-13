@@ -4,7 +4,7 @@ const createListItemsMarkup = (items) => {
     return items.map(({ preview, description, original }) => {
       return `
     <div class="gallery__item ">
-        <a class="gallery__link" href="original">
+        <a class="gallery__link" href="${original}">
             <img
             class="gallery__image" 
             src="${preview}" 
@@ -18,8 +18,7 @@ const createListItemsMarkup = (items) => {
 const closeLightBox = (lightBox) => {
     window.addEventListener('keydown', (event) => {
         if(event.code !== 'Escape') return; lightBox.close()
-        { once: true }
-    })
+    }, { once: true });
 }
 
 const galleryRef = document.querySelector('.gallery');
